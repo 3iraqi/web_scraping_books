@@ -2,6 +2,24 @@
 
 > The targeted site: [books.toscrape](https://books.toscrape.com/index.html)
 
+## Web Scraping Process: Fetching and Storing Data in CSV
+
+```mermaid
+graph TD;
+    A[Start] --> B[Input: Number of pages to scrape]
+    B --> C[Initialize empty list for data]
+    C --> D[Loop through pages]
+    D -->|For each page| E[Scrape data]
+    E --> F[Store data in list]
+    F --> G{More pages to scrape?}
+    G -- Yes --> D
+    G -- No --> H[Save  data in CSV file]
+    H --> I[End]
+
+```
+
+## Code and Explanation
+
 - First we import the required libraries
 
 ```python
@@ -63,6 +81,8 @@ def get_books_info(books,pn):
         })
 ```
 
+---
+
 - Then I <font style="color:yellow;font-size:40px;">ask the user</font> to enter the number of pages he want to collect from this site, and start to request the page content using requests library.
 
 ```python
@@ -82,7 +102,13 @@ for i in range(page_number):
 
 ---
 
-- Finally, I put all the data in a CSV file using with open() and CSV library.
+- Finally, I put all the data in a CSV file using
+
+```python
+    with open() 
+```
+
+and `CSV` library.
 
 ```python
 keys=books_details[0].keys()
@@ -94,5 +120,7 @@ with open(file_name,mode="w",encoding="utf-8-sig",newline="") as output_file:
     dict_writer.writerows(rowdicts=books_details)
     print(" file Created: ")
 ```
+
+
 
 [author: Mohamed.8.eleraqi](Mohamed.8.eleraqi@gmaill.com)
